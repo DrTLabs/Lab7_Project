@@ -1,0 +1,38 @@
+name: Verilog Testbench
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test-ce-divide:
+    name: Test ce_divide
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Icarus Verilog
+        run: sudo apt-get update && sudo apt-get install -y iverilog
+
+      - name: Test CE Divider
+        run: |
+          iverilog -o sim.vvp rtl/ce_divide.v tb/ce_divide_tb.v
+          vvp sim.vvp | tee output.txt
+          grep -q "TEST PASSED" output.txt
+
+  test-hex-tdm-top:
+    name: Test hex_tdm_top
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Icarus Verilog
+        run: sudo apt-get update && sudo apt-get install -y iverilog
+
+      - name: Test TDM Hex Display
+        run: |
+          iverilog -o sim.vvp rtl/ce_divide.v rtl/tdm_scan.v rtl/anode_decode.v rtl/digit_mux.v rtl/hex_to_7seg.v rtl/hex_tdm_top.v tb/hex_tdm_top_tb.v
+          vvp sim.vvp | tee output.txt
+          grep -q "TEST PASSED" output.txt
