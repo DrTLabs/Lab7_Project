@@ -25,7 +25,7 @@ hex_tdm_top (top-level wrapper)
 
 **RTL Diagram:**
 
-![RTL Diagram for hex_tdm_top](Assets/rtl_hex_tdm_top.jpg)
+![RTL Diagram for hex_tdm_top](Assets/rtl_hex_tdm_top.png)
 
 ---
 
@@ -71,7 +71,7 @@ hex_tdm_top (top-level wrapper)
 
 ### Step 4: Top-Level Integration
 - [ ] Open `rtl/hex_tdm_top.v` and work through TODOs #1-#6
-- [ ] Use the RTL diagram (`../Assets/rtl_hex_tdm_top.jpg`) as your guide
+- [ ] Use the RTL diagram (`../Assets/rtl_hex_tdm_top.png`) as your guide
 - [ ] TODO #1: Declare the internal wires
 - [ ] TODOs #2-#6: Instantiate each submodule with correct port connections
 
