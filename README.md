@@ -25,7 +25,7 @@ hex_tdm_top (top-level wrapper)
 
 **RTL Diagram:**
 
-![RTL Diagram for hex_tdm_top](../Assets/rtl_hex_tdm_top.jpg)
+![RTL Diagram for hex_tdm_top](Assets/rtl_hex_tdm_top.jpg)
 
 ---
 
