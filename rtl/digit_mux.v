@@ -10,10 +10,13 @@
 //   idx=2 -> sw[11: 8]
 //   idx=3 -> sw[15:12]  (leftmost digit)
 
+`timescale 1ns/1ps
+`default_nettype none   // undeclared names are errors, not silent 1-bit wires
+
 module digit_mux (
-    input      [15:0] sw,
-    input      [1:0]  idx,
-    output reg [3:0]  digit
+    input  wire [15:0] sw,
+    input  wire [1:0]  idx,
+    output reg  [3:0]  digit
 );
 
     always @(*) begin

@@ -11,12 +11,15 @@
 //
 // Refer to the RTL diagram in Assets/ for signal flow.
 
+`timescale 1ns/1ps
+`default_nettype none   // undeclared names are errors, not silent 1-bit wires
+
 module hex_tdm_top #(parameter DIV_VAL = 250_000) (
-    input         clk,
-    input         btnC,       // Center button = active-high reset
-    input  [15:0] sw,
-    output [6:0]  seg,
-    output [3:0]  an
+    input  wire        clk,
+    input  wire        btnC,     // Center button = active-high reset
+    input  wire [15:0] sw,
+    output wire [6:0]  seg,
+    output wire [3:0]  an
 );
 
     // Map board button to internal reset for readability

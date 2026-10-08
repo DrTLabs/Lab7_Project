@@ -17,6 +17,9 @@
 //
 // Status: PROVIDED COMPLETE - do not modify
 
+`timescale 1ns/1ps
+`default_nettype none   // undeclared names are errors, not silent 1-bit wires
+
 module ce_divide #(
     parameter VAL = 250_000
 )(

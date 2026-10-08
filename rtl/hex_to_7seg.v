@@ -7,9 +7,12 @@
 //
 // Status: PROVIDED COMPLETE - do not modify
 
+`timescale 1ns/1ps
+`default_nettype none   // undeclared names are errors, not silent 1-bit wires
+
 module hex_to_7seg(
-    input      [3:0] hex,
-    output reg [6:0] seg   // {g,f,e,d,c,b,a}, active-low
+    input  wire [3:0] hex,
+    output reg  [6:0] seg   // {g,f,e,d,c,b,a}, active-low
 );
 
     always @(*) begin

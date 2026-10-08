@@ -7,6 +7,51 @@ on:
     branches: [ main, master ]
 
 jobs:
+  # ---------------- Part A: decoder and mux (GitHub only) ----------------
+  test-anode-decode:
+    name: Test anode_decode
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Icarus Verilog
+        run: sudo apt-get update && sudo apt-get install -y iverilog
+
+      - name: Test Anode Decoder
+        run: |
+          iverilog -o sim.vvp rtl/anode_decode.v tb/anode_decode_tb.v
+          vvp sim.vvp | tee output.txt
+          grep -q "TEST PASSED" output.txt
+
+      - name: Check testbench coverage (all four idx values, correct expected patterns)
+        run: |
+          # A testbench with only the provided idx=0 vector would print TEST PASSED,
+          # so require one passing row per idx with the truth-table anode pattern.
+          for row in "0:1110" "1:1101" "2:1011" "3:0111"; do
+            i=${row%%:*}; an=${row##*:}
+            if ! grep -qE "^ *$i +\| $an \| $an +\| ok$" output.txt; then
+              echo "::error::anode_decode_tb must check idx=$i with expected_an = 4'b$an (no passing row found)"
+              exit 1
+            fi
+            echo "idx=$i: checked, an=$an"
+          done
+
+  test-digit-mux:
+    name: Test digit_mux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Icarus Verilog
+        run: sudo apt-get update && sudo apt-get install -y iverilog
+
+      - name: Test Digit Multiplexer
+        run: |
+          iverilog -o sim.vvp rtl/digit_mux.v tb/digit_mux_tb.v
+          vvp sim.vvp | tee output.txt
+          grep -q "TEST PASSED" output.txt
+
+  # ---------------- Part B: TDM display (in lab) ----------------
   test-ce-divide:
     name: Test ce_divide
     runs-on: ubuntu-latest

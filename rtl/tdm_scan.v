@@ -7,11 +7,14 @@
 //
 // Status: PROVIDED COMPLETE - do not modify
 
+`timescale 1ns/1ps
+`default_nettype none   // undeclared names are errors, not silent 1-bit wires
+
 module tdm_scan (
-    input            clk,
-    input            rst,
-    input            ce,
-    output reg [1:0] idx
+    input  wire       clk,
+    input  wire       rst,
+    input  wire       ce,
+    output reg  [1:0] idx
 );
 
     always @(posedge clk) begin

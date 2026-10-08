@@ -15,9 +15,12 @@
 // Hint: Model your solution after hex_to_7seg.v in the rtl/ directory
 //       (use a combinational always @(*) with a case on idx).
 
+`timescale 1ns/1ps
+`default_nettype none   // undeclared names are errors, not silent 1-bit wires
+
 module anode_decode (
-    input      [1:0] idx,
-    output reg [3:0] an
+    input  wire [1:0] idx,
+    output reg  [3:0] an
 );
 
     // TODO: Implement combinational active-low one-hot anode decode
